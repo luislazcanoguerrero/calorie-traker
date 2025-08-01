@@ -5,12 +5,18 @@ export default function Form() {
 
 const [activity, setActivity ] = useState({
   category: 1,
-  actividad: '',
-  calorias: 0
+  name: '',
+  calories: 0
 })
 
+
 const onChangeProcesa = (e) => {
-  console.log(e.target.value)
+
+  setActivity({
+    ...activity,
+    [e.target.id] : e.target.value
+  })
+
 }
 
   return (
@@ -18,16 +24,16 @@ const onChangeProcesa = (e) => {
       <form className="space-y-5 bg-white shadow p-10 rounded-lg">
         {/* CAMPO DE LAS CATEGORIAS  */}
         <div className="grid grid-cols-1 gap-3">
-          <label htmlFor="categoriaId" className="font-bold">Categorias</label>
-          <select name="" 
-              id="categoriaId" 
-              value={activity.calorias}
-              onChange={onChangeProcesa}
-              className="border border-slate-300 p-2 rounded-lg w-full bg-white" >
+          <label htmlFor="category" className="font-bold">Categorias</label>
+          <select 
+              className="border border-slate-300 p-2 rounded-lg w-full bg-white"
+              id="category" 
+              value={activity.category}
+              onChange={onChangeProcesa}>
             {
-              categories.map(items => (
-                <option value="" key={items.id} >
-                  {items.name}
+              categories.map(category => (
+                <option value={category.id} key={category.id} >
+                  {category.name}
                 </option>
               ))
             }
@@ -37,8 +43,8 @@ const onChangeProcesa = (e) => {
         <div className="grid grid-cols-1 gap-3">
           <label htmlFor="actividadId" className="font-bold">Actividad</label>
           <input type="text"
-            id="actividadId"
-            value={activity.actividad}
+            id="name"
+            value={activity.name}
             onChange={onChangeProcesa}
             className="border border-slate-300 rounded-lg p-2" 
             placeholder="Ej. comida, ensaladas, jugo de naranjas, ejercicios, pesas, etc.."
@@ -48,9 +54,9 @@ const onChangeProcesa = (e) => {
         <div className="grid grid-cols-1 gap-3">
           <label htmlFor="caloriasId" className="font-bold">Calorias</label>
           <input type="number"
-            id="caloriasId"
+            id="calories"
             onChange={onChangeProcesa}
-            value={activity.calorias}
+            value={activity.calories}
             className="border border-slate-300 rounded-lg p-2" 
             placeholder="Ej. 200 o 500."
           />
